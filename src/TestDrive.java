@@ -1,3 +1,5 @@
+import static events.EventType.WindowEnd;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -36,7 +38,7 @@ public class TestDrive {
 
     private int findSplit(ArrayList<Event> eventsAtT) {
         for (int i = 0; i < eventsAtT.size(); i++) {
-            if (eventsAtT.get(i).type == Event.EventType.WindowEnd) {
+            if (eventsAtT.get(i).type == WindowEnd) {
                 return i;
             }
         }

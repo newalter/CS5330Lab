@@ -1,7 +1,7 @@
 package devices;
 
-import static events.Event.EventType.Claim;
-import static events.Event.EventType.WindowEnd;
+import static events.EventType.Claim;
+import static events.EventType.WindowEnd;
 
 import java.util.LinkedList;
 import java.util.List;

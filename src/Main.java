@@ -1,3 +1,5 @@
+import static events.EventType.WindowEnd;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class Main {
         for (int i = 0; i < numDevices; i++) {
             Device device = new BinaryExp();
             devices.addLast(device);
-            events.add(new Event(0, device, Event.EventType.WindowEnd));
+            events.add(new Event(0, device, WindowEnd));
         }
         return events;
     }
