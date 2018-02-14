@@ -3,25 +3,24 @@ import static events.EventType.WindowEnd;
 import java.util.LinkedList;
 import java.util.List;
 
-import devices.BinaryExp;
-import devices.Device;
+import devices.*;
 import events.Event;
 
 public class Main {
 
-    public static int numDevices = 1000;
-    public static LinkedList<Device> devices = new LinkedList<>();
+    private static final int NUM_DEVICES = 1000;
+
     public static void main(String args[]){
         TestDrive testDrive = new TestDrive();
-        int duration = testDrive.test(initialise());
-        System.out.println(duration);
+        Result result = testDrive.test(initialise());
+        System.out.println(result.getDuration());
+        System.out.println(result.getTotalTries()/ NUM_DEVICES);
     }
 
-    public static List<Event> initialise(){
+    private static List<Event> initialise(){
         LinkedList<Event> events = new LinkedList<>();
-        for (int i = 0; i < numDevices; i++) {
-            Device device = new BinaryExp();
-            devices.addLast(device);
+        for (int i = 0; i < NUM_DEVICES; i++) {
+            Device device = new Exp();
             events.add(new Event(0, device, WindowEnd));
         }
         return events;

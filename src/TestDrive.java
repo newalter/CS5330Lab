@@ -9,8 +9,9 @@ import events.EventComparator;
 
 public class TestDrive {
 
-    public int test(List<Event> events) {
+    public Result test(List<Event> events) {
         int duration = 0;
+        int totalTries = 0;
 
         PriorityQueue<Event> eventQueue = new PriorityQueue(new EventComparator());
         eventQueue.addAll(events);
@@ -26,6 +27,7 @@ public class TestDrive {
             if (split == 1) {
                 eventsAtT.get(0).device.isSuccessful = true;
                 duration = eventsAtT.get(0).time;
+                totalTries += eventsAtT.get(0).device.tries;
             }
             for (int i=split; i < eventsAtT.size(); i++) {
                 Event event = eventsAtT.get(i);
@@ -33,7 +35,7 @@ public class TestDrive {
             }
         }
 
-        return duration;
+        return new Result(duration, totalTries);
     }
 
     private int findSplit(ArrayList<Event> eventsAtT) {
@@ -44,5 +46,6 @@ public class TestDrive {
         }
         return eventsAtT.size();
     }
+
 
 }

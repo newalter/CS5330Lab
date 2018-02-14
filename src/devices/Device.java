@@ -11,11 +11,12 @@ import events.Event;
 
 public abstract class Device {
 
-    public static Random random = new Random();
+    private static Random random = new Random();
 
     public int window = 1;
     public int tries = 0;
     public boolean isSuccessful = false;
+
     public abstract void updateWindow();
 
     public List<Event> nextRound(int time) {
