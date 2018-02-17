@@ -8,7 +8,7 @@ public class Sqrt extends Device {
 
     @Override
     public void updateWindow() {
-        if (sqrtT < Math.sqrt(tries)) {
+        if (sqrtT < Math.sqrt(3 * tries)) {
             sqrtT++;
             windowFloat = windowFloat * _alpha;
             window = (int) windowFloat;

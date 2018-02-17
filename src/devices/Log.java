@@ -5,7 +5,7 @@ public class Log extends Device {
 
     @Override
     public void updateWindow() {
-        windowFloat = windowFloat * (1 + 1 / (log2(windowFloat)));
+        windowFloat = windowFloat * (1 + 1 / (log2(windowFloat + 1)));
         window = (int) windowFloat;
     }
 

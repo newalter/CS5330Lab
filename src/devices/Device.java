@@ -9,7 +9,7 @@ import java.util.Random;
 
 import events.Event;
 
-public abstract class Device {
+public abstract class Device implements Cloneable{
 
     private static Random random = new Random();
 
@@ -28,5 +28,12 @@ public abstract class Device {
         tries++;
         updateWindow();
         return events;
+    }
+
+    public Device clone(){
+        try{
+            return (Device) super.clone();
+        } catch (CloneNotSupportedException e){}
+        return null;
     }
 }

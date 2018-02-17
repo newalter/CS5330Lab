@@ -9,7 +9,7 @@ public class Backon extends Device {
         if (window > 1) {
             window = window / 2;
         } else {
-            window = 2^k;
+            window = (int) Math.pow(2, k);
             k++;
         }
     }

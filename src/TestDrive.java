@@ -15,9 +15,9 @@ public class TestDrive {
 
         PriorityQueue<Event> eventQueue = new PriorityQueue(new EventComparator());
         eventQueue.addAll(events);
-
+        ArrayList<Event> eventsAtT = new ArrayList<>();
         while (!eventQueue.isEmpty()) {
-            ArrayList<Event> eventsAtT = new ArrayList<>();
+            eventsAtT.clear();
             eventsAtT.add(eventQueue.poll());
             while (!eventQueue.isEmpty() && eventsAtT.get(0).isSameTime(eventQueue.peek())) {
                 eventsAtT.add(eventQueue.poll());

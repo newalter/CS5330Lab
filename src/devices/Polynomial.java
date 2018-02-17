@@ -12,6 +12,6 @@ public class Polynomial extends Device {
 
     @Override
     public void updateWindow() {
-        window = (tries + 1) ^ _alpha;
+        window = (int) Math.pow(tries + 1, _alpha);
     }
 }
