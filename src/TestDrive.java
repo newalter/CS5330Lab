@@ -6,19 +6,21 @@ import java.util.PriorityQueue;
 
 import events.Event;
 import events.EventComparator;
+import models.Model;
 
 public class TestDrive {
 
-    public Result test(List<Event> events) {
+    public Result test(int n, Model model) {
         int duration = 0;
         int totalTries = 0;
 
         PriorityQueue<Event> eventQueue = new PriorityQueue(new EventComparator());
-        eventQueue.addAll(events);
+        eventQueue.addAll(model.initialise(n));
         ArrayList<Event> eventsAtT = new ArrayList<>();
         while (!eventQueue.isEmpty()) {
             eventsAtT.clear();
             eventsAtT.add(eventQueue.poll());
+            int currentTime = eventsAtT.get(0).time;
             while (!eventQueue.isEmpty() && eventsAtT.get(0).isSameTime(eventQueue.peek())) {
                 eventsAtT.add(eventQueue.poll());
             }
@@ -26,12 +28,15 @@ public class TestDrive {
             int split = findSplit(eventsAtT);
             if (split == 1) {
                 eventsAtT.get(0).device.isSuccessful = true;
-                duration = eventsAtT.get(0).time;
+                duration = currentTime;
                 totalTries += eventsAtT.get(0).device.tries;
             }
             for (int i=split; i < eventsAtT.size(); i++) {
                 Event event = eventsAtT.get(i);
-                eventQueue.addAll(event.device.nextRound(event.time));
+                eventQueue.addAll(event.device.nextRound(currentTime));
+            }
+            if (!eventQueue.isEmpty()) {
+                eventQueue.addAll(model.newArrivals(currentTime, eventQueue.peek().time));
             }
         }
 

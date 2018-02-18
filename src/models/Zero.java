@@ -3,13 +3,16 @@ package models;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Zero implements Model {
+import devices.Device;
+import events.Event;
 
-    public List<Integer> generateTime(int n){
-        LinkedList<Integer> times = new LinkedList<>();
-        for (int i = 0; i < n; i++) {
-            times.add(0);
-        }
-        return times;
+public class Zero extends Model {
+
+    public Zero(Device device) {
+        super(device);
+    }
+
+    public List<Event> newArrivals(int startTime, int endTime){
+        return new LinkedList<>();
     }
 }
