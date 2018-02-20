@@ -1,13 +1,8 @@
-import static events.EventType.WindowEnd;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 
 import devices.*;
-import events.*;
 import models.*;
 import models.Sqrt;
 
@@ -26,29 +21,29 @@ public class Main {
         StringBuilder output = new StringBuilder();
         output.append(header);
 
-        for (int n = 10; n<= 100000; n = n * 10) {
+        for (int n = 10; n<= 10; n = n * 10) {
             int iterations = Math.max(Total / n, 5);
             duration = 0;
             tries = 0;
             for (int i = 0; i < iterations; i++) {
                 Result result = testDrive.test(n, model);
                 duration += result.getDuration();
-                tries += (double) result.getTotalTries() / n - 1;
+                tries += (double) result.getTotalTries() / model.getTotalNum() - 1;
             }
             output.append(","); output.append((double) duration / iterations); output.append(",");output.append(tries / iterations);
         }
         output.append("\n");
-        writeToFile(output.toString());
+        //writeToFile(output.toString());
         System.out.println(output.toString());
     }
 
     private static void setParameters() {
         testDrive = new TestDrive();
-        device = new devices.Sqrt();
-        model = new Sqrt(0.5);
+        device = new Sqrt3t();
+        model = new Sqrt(0.0001, device);
         header = "Sqrt";
-        Total = 10000;
-        path = "C:\\Users\\Walter\\Documents\\NUS\\Computing\\CS5330\\lab\\Sqrt(0.5).csv";
+        Total = 10;
+        path = "C:\\Users\\Walter\\Documents\\NUS\\Computing\\CS5330\\lab\\Lambda.csv";
     }
 
 

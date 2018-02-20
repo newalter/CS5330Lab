@@ -1,5 +1,7 @@
 package models;
 
+import static events.EventType.WindowEnd;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -27,9 +29,23 @@ public class Sqrt extends Model {
                 for (int i = 0; i < batchSize; i++) {
                     events.add(new Event(time, newDevice(), EventType.WindowEnd));
                 }
+                totalNum+= batchSize;
+                break;
             } else if (r.nextDouble() < _lambda) {
                 events.add(new Event(time, newDevice(), EventType.WindowEnd));
+                totalNum++;
+                break;
             }
+        }
+        return events;
+    }
+
+    @Override
+    public List<Event> initialise(int n) {
+        this.n = n;
+        LinkedList<Event> events = new LinkedList<>();
+        for (int i = 0; i < 2; i++) {
+            events.add(new Event(0, newDevice(), WindowEnd));
         }
         return events;
     }

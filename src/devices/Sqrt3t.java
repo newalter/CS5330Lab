@@ -1,6 +1,6 @@
 package devices;
 
-public class Sqrt extends Device {
+public class Sqrt3t extends Device {
     private final double _alpha = Math.E;
 
     private double windowFloat = 1;
