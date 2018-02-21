@@ -2,9 +2,22 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import devices.*;
-import models.*;
+import devices.Backon;
+import devices.BackonPrime;
+import devices.BinaryExp;
+import devices.Device;
+import devices.Exp;
+import devices.Linear;
+import devices.Log;
+import devices.LogLog;
+import devices.Polynomial;
+import devices.Sqrt3t;
+import models.Gaussian;
+import models.Lambda;
+import models.Model;
 import models.Sqrt;
+import models.SqrtNew;
+import models.Zero;
 
 public class Main {
 
@@ -14,15 +27,17 @@ public class Main {
     public static String header;
     private static int Total;
     private static String path;
+    private static int[] number = {10, 20, 50, 100, 200, 500, 1000, 10000};
 
     public static void main(String args[]){
         setParameters();
         int duration; double tries;
         StringBuilder output = new StringBuilder();
         output.append(header);
-
-        for (int n = 10; n<= 10; n = n * 10) {
-            int iterations = Math.max(Total / n, 5);
+        //int n = 11000;
+        for (int j = 0; j< 8; j++) {
+            int n = number[j];
+            int iterations =  100;
             duration = 0;
             tries = 0;
             for (int i = 0; i < iterations; i++) {
@@ -33,24 +48,31 @@ public class Main {
             output.append(","); output.append((double) duration / iterations); output.append(",");output.append(tries / iterations);
         }
         output.append("\n");
-        //writeToFile(output.toString());
+        writeToFile(output.toString());
         System.out.println(output.toString());
+        System.out.println(model.getTotalNum());
     }
 
+    /**
+     * Manual parameter setting
+     */
     private static void setParameters() {
         testDrive = new TestDrive();
-        device = new Sqrt3t();
-        model = new Sqrt(0.0001, device);
-        header = "Sqrt";
-        Total = 10;
-        path = "C:\\Users\\Walter\\Documents\\NUS\\Computing\\CS5330\\lab\\Lambda.csv";
+        device = new Polynomial(3);
+        model = new SqrtNew(0.01, device);
+        header = "Poly(3)";
+        Total = 13000;
+        path = "C:\\Users\\Walter\\Documents\\NUS\\Computing\\CS5330\\lab\\Data.csv";
     }
 
-
-    private static void writeToFile(String s) {
+    /**
+     * Writes the output to a csv file specified in path
+     * @param output
+     */
+    private static void writeToFile(String output) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(path, true));
-            writer.append(s);
+            writer.append(output);
             writer.close();
         } catch (IOException e) {
         }

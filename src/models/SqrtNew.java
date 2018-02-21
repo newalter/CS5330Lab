@@ -10,42 +10,39 @@ import devices.Device;
 import events.Event;
 import events.EventType;
 
-public class Sqrt extends Model {
+public class SqrtNew extends Model {
 
     private double _lambda;
-    public Sqrt(double lambda, Device device){
+    private LinkedList<Event> events = new LinkedList<>();
+    
+    public SqrtNew(double lambda, Device device){
         super(device);
         _lambda = lambda;
     }
 
     public List<Event> newArrivals(int startTime, int endTime){
-        double p = 1/ Math.sqrt(n);
-        int batchSize = (int) Math.sqrt(n);
-
-        LinkedList<Event> events = new LinkedList<>();
-        Random r = new Random();
-        for (int time = startTime + 1; time <= endTime; time++) {
-            if (r.nextDouble() < p) {
-                for (int i = 0; i < batchSize; i++) {
-                    events.add(new Event(time, newDevice(), EventType.WindowEnd));
-                }
-                totalNum+= batchSize;
-                break;
-            } else if (r.nextDouble() < _lambda) {
-                events.add(new Event(time, newDevice(), EventType.WindowEnd));
-                totalNum++;
-                break;
-            }
-        }
         return events;
     }
 
     public List<Event> initialise(int n) {
         this.n = n;
-        totalNum = 2;
+        totalNum = n;
+        double p = 1/ Math.sqrt(n);
+        int batchSize = (int) Math.sqrt(n);
+        Random r = new Random();
         LinkedList<Event> events = new LinkedList<>();
-        for (int i = 0; i < 1; i++) {
-            events.add(new Event(0, newDevice(), WindowEnd));
+        int time = 0;
+        while (n > 0) {
+            if (r.nextDouble() < p) {
+                for (int i = 0; i < Math.min(n, batchSize); i++) {
+                    events.add(new Event(time, newDevice(), EventType.WindowEnd));
+                }
+                n -= batchSize;
+            }else if (r.nextDouble() < _lambda) {
+                events.add(new Event(time, newDevice(), EventType.WindowEnd));
+                n--;
+            }
+            time++;
         }
         return events;
     }

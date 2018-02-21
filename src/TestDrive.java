@@ -38,6 +38,7 @@ public class TestDrive {
             if (!eventQueue.isEmpty()) {
                 eventQueue.addAll(model.newArrivals(currentTime, eventQueue.peek().time));
             }
+            //if (model.getTotalNum() > 1000000) break;
         }
 
         return new Result(duration, totalTries);
