@@ -1,3 +1,5 @@
+package testDrives;
+
 public class Result {
     private int duration;
     private int totalTries;

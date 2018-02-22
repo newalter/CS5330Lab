@@ -2,22 +2,13 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import devices.Backon;
-import devices.BackonPrime;
-import devices.BinaryExp;
 import devices.Device;
-import devices.Exp;
-import devices.Linear;
-import devices.Log;
-import devices.LogLog;
 import devices.Polynomial;
-import devices.Sqrt3t;
-import models.Gaussian;
-import models.Lambda;
 import models.Model;
-import models.Sqrt;
-import models.SqrtNew;
 import models.Zero;
+import testDrives.OneShotTestDrive;
+import testDrives.Result;
+import testDrives.TestDrive;
 
 public class Main {
 
@@ -57,9 +48,9 @@ public class Main {
      * Manual parameter setting
      */
     private static void setParameters() {
-        testDrive = new TestDrive();
+        testDrive = new OneShotTestDrive();
         device = new Polynomial(3);
-        model = new SqrtNew(0.01, device);
+        model = new Zero(device);
         header = "Poly(3)";
         Total = 13000;
         path = "C:\\Users\\Walter\\Documents\\NUS\\Computing\\CS5330\\lab\\Data.csv";
