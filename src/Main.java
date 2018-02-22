@@ -2,10 +2,19 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import devices.Backon;
+import devices.BackonPrime;
 import devices.Device;
+import devices.Exp;
+import devices.Linear;
+import devices.Log;
+import devices.LogLog;
 import devices.Polynomial;
+import devices.Sqrt3t;
 import models.Model;
 import models.Zero;
+import testDrives.HalvesTestDrive;
+import testDrives.InterruptionTestDrive;
 import testDrives.OneShotTestDrive;
 import testDrives.Result;
 import testDrives.TestDrive;
@@ -48,10 +57,10 @@ public class Main {
      * Manual parameter setting
      */
     private static void setParameters() {
-        testDrive = new OneShotTestDrive();
-        device = new Polynomial(3);
+        testDrive = new InterruptionTestDrive();
+        device = new Linear(5);
         model = new Zero(device);
-        header = "Poly(3)";
+        header = "Linear(5)";
         Total = 13000;
         path = "C:\\Users\\Walter\\Documents\\NUS\\Computing\\CS5330\\lab\\Data.csv";
     }
